@@ -32,23 +32,25 @@ v0=14
 
 
 def accelbalance(t,car,tire,Tau,v0): #time,car,tire,Torque to tire,initial velocity
-    alpha=car.massv/(Tau*tire.radius)
-    beta=(2*car.massv)/(car.cd*const.rhoair*car.frontarea)
-    c=-(alpha*v0+beta/v0)    
-    return (((c-t)**2-4*alpha*beta)**0.5-c+t)/(2*alpha)
+    alpha = car.massv / ( Tau * tire.radius )
+    beta = ( 2*car.massv ) / ( car.cd * const.rhoair * car.frontarea )
+    c = -( alpha * v0 + beta / v0 )    
+    return ((( c - t )** 2 - 4 * alpha * beta )**0.5 - c + t ) / ( 2*alpha )
     
 
 # (Tau=torque,alpha=alpha,beta=beta,v0=14)
-print sp.integrate.quad(accelbalance,0,1,args=(tiger19,tire,Tau,v0))
+print sp.integrate.quad( accelbalance ,0,1, args=(tiger19 , tire , Tau , v0 ))
 
 
 def brakebalance(u,t,car,tire,v0):
     u1, u2=u
         #u1=x u2=x'
-    beta=(2*car.massv)/(car.cd*const.rhoair*car.frontarea)
-    gamma=(2*car.massv)/(car.cl*const.rhoair*car.frontarea)
-    uprime=[u2 , -tire.mu * sp.constants.g - ( 1/gamma + 1/beta ) * u2]
+    beta=( 2*car.massv ) / ( car.cd * const.rhoair * car.frontarea )
+    gamma=( 2*car.massv ) / ( tire.mu * car.cl * const.rhoair * car.frontarea )
+    uprime=[u2 , -tire.mu * sp.constants.g - ( 1/gamma + 1/beta ) * u2**2]
     return uprime
     
     
 print sp.integrate.odeint(brakebalance,[0,14],np.linspace(0,2,100),args=(tiger19,tire,v0))
+
+#track1=Track(testTrack1)
