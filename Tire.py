@@ -6,5 +6,6 @@ Created on Tue Aug 02 18:47:38 2016
 """
 
 class Tire(object):
-    def __init__(self,mu):
+    def __init__(self,mu,radius):
         self.mu=mu
+        self.radius=radius
