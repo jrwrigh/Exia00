@@ -11,15 +11,15 @@ import numpy as np
 
 
 class Track(object):
-    def __init__(self,name):
-        self.name=name
-        self.numfeatures=None
-        self.features=[]
+    def __init__(self):
+        self._features=[]
     
     def add_feature(self,feature):
-        self.features.append(feature)
+        self._features.append(feature)
 
-    
+    def num_features(self):
+        return len(self._features) - 1
+        
     def show_featuers(self):
         pass
     
@@ -37,3 +37,12 @@ class Corner(object):
             self.radius)))**0.5
     def time(self,car,tire):
         return self.V_max(car,tire)/self.length
+        
+class Straight(object):
+    def __init__(self,length):
+        self.length=length
+
+class EndFeature(object):
+    def __init__(self):
+        pass
+    
